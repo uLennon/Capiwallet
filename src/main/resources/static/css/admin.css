@@ -1,0 +1,162 @@
+/* Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #552909;
+    color: #333;
+    flex-direction: column;
+    margin: none;
+}
+
+/* Container */
+.container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Header e Footer */
+header, footer {
+    background-color: #552909;
+    padding-top: 16px;
+    color: #fff;
+}
+
+header {
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+header > .container,
+footer > .container {
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+}
+
+footer {
+    padding: 16px 0;
+}
+
+/* Navegação */
+nav {
+    background-color: #8B4513;
+    padding: 16px 0;
+    display: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav li {
+    list-style: none;
+    margin-right: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav li a {
+    color: #fff;
+    text-decoration: none;
+    margin-top: 19px;
+}
+
+nav li a:hover {
+    text-decoration: underline;
+}
+
+/* Menu */
+.menu {
+    width: 32px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.menu span {
+    height: 2px;
+    width: 100%;
+    background-color: #fff;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.container-flex {
+    display: flex;
+}
+
+/* Seções */
+section {
+    padding: 48px 0;
+}
+
+section h2 {
+    margin-bottom: 16px;
+}
+
+/* Conteúdo Dinâmico */
+#content {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    margin-top: 1%;
+}
+
+/* Botões */
+button {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    border: none;
+    background-color: rgb(94, 73, 15);
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+.header-actions {
+    margin-top: 20px;
+    text-align: right; 
+}
+
+#sair-btn {
+    background-color: #e74c3c; 
+    color: #fff; 
+    border: none;
+    border-radius: 2px;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#sair-btn:hover {
+    background-color: #c0392b;
+}
+
+@media (max-width: 360px) {
+    width: 360px;
+
+}

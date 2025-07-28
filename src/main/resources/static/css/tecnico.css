@@ -1,0 +1,470 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #003366;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+.menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+
+#nav-menu ul li {
+    padding: 10px;
+    text-align: center;
+}
+
+#nav-menu {
+    display: none;
+    background-color: #003366;
+}
+
+
+#nav-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#nav-menu ul li a,
+#nav-menu ul li button {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+#content {
+    align-items: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.busca-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+#busca-button{
+    background-color: #003366;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+}
+
+#buscar-qrcode{
+    display: grid;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px; 
+    width: 100%; 
+}
+
+#buscar-qrcode h1 {
+    margin: 0 auto;
+}
+
+#buscar-qrcode button {
+    background-color: #003366;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 2em;
+    color: white;
+}
+
+#buscar-qrcode button:hover {
+    background-color: #1f5020;
+}
+
+
+#form-buscar-matricula{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.usuario-item {
+    background-color: #fff;
+    padding: 5%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    gap: 20px;
+    width: 60%;
+}
+
+.foto-usuario {
+    width: 150px;
+    height: 200px;
+    border-radius: 0%;
+    object-fit: cover;
+}
+
+.info-usuario {
+    flex-grow: 1;
+
+}
+.info-usuario {
+    position: relative;
+    text-align: center;
+}
+
+#menu-usuario {
+    cursor: pointer;
+}
+
+.info-usuario p {
+    margin: 5px 0;
+
+}
+
+#nav-menu-usuario {
+    display: none;
+}
+
+li  {
+    list-style: none;
+}
+
+
+li button {
+    max-width: 100% ;
+    transition: all 0.3s ease-in-out;
+}
+
+li button:hover {
+    background-color: #e53935;
+    color: #fff;
+}
+
+.usuario-item p {
+    margin: 10px 0;
+}
+
+.video-container {
+    width: 320px;
+    height: 320px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    position: relative;
+}
+
+#video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.5);
+}
+
+.btn-descontar {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: #003366;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-descontar:hover {
+    background-color: #002244;
+}
+
+.btn-reembolso {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: #9a9a9a;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#busca {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    font-size: 16px;
+    background: url('https://cdn-icons-png.flaticon.com/512/622/622669.png') no-repeat right 10px center;
+    background-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-confirm,
+#modal-cancel {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#modal-confirm {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#modal-confirm:hover {
+    background-color: #45a049;
+}
+
+#modal-cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+#modal-cancel:hover {
+    background-color: #e53935;
+}
+
+input {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+#modal-reembolso {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#modal-reembolso .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#modal-reembolso .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#modal-reembolso .close:hover,
+#modal-reembolso .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#modal-reembolso {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+#modal-reembolso .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#modal-reembolso .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#modal-reembolso .close:hover,
+#modal-reembolso .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#mealForm {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#mealForm label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+#mealForm input[type="radio"] {
+    margin-right: 10px;
+}
+
+#mealForm input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+#mealForm button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #003366;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#mealForm button:hover {
+    background-color: #0056b3;
+}
+
+#mealForm button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+
+#buscar-matricula{
+    display: none;
+}
+
+
+#descontos{
+    width: 800px;
+}
+
+@media (max-width: 768px) {
+    .usuario-item {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .foto-usuario {
+        width: 200px;
+        height: 240px;
+        object-fit: cover;
+
+    }
+}
+

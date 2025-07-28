@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Painel do Técnico - Restaurante Universitário UFRRJ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" href="./css/tecnico.css">
+        <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <header>
+            <div class="container container-flex">
+                <h1>Técnicos R.U</h1>
+                <div class="menu" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <nav id="nav-menu">
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="buscar-matricula">Buscar por matrícula</a></li>
+                        <li><a href="#" class="nav-link" data-target="buscar-qrcode">Buscar por QR Code</a></li>
+                        <li><a href="/tecnico/compra">Compra Presencial</a></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <button id="sair-btn" value="SAIR">Sair</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main id="content">
+            <div id="tipoBusca" th:data-tipo-busca="${tipoBusca}"></div>
+            <section class="busca-container">
+                <div id="buscar-matricula" class="content-section">
+                    <form th:action="@{/tecnico}" method="post" id="form-buscar-matricula">
+                        <input type="hidden" name="tipoBusca" value="matricula">
+                        <input type="text" id="busca" name="busca" placeholder="Buscar por nome ou matrícula">
+                        <button id="busca-button" type="submit">Consultar</button>
+                    </form>
+                </div>
+                <div id="buscar-qrcode">
+                    <h1>Buscar por QR Code</h1>
+                    <div class="video-container">
+                        <video id="video" autoplay></video>
+                    </div>
+
+                    <canvas id="canvas" style="display: none;"></canvas>
+                    <button id="startButton">Ler QR Code</button>
+                    <p id="qrResult"></p>
+
+                    <form id="qrForm" method="post" th:action="@{/tecnico}">
+                        <input type="hidden" name="tipoBusca" value="qrcode">
+                        <input type="hidden" name="busca" id="qrCodeInput">
+                        <button type="submit" style="display:none;" id="submitQR">Enviar QR Code</button>
+                    </form>
+                </div>
+
+                <div class="usuario-item" th:if="${user}">
+                    <img class="foto-usuario" th:if="${user.dataImage}" th:src="${user.dataImage}" alt="Imagem do Usuário"/>
+                    <div class="info-usuario">
+                        <p th:text="${user.nome}"></p>
+                        <p th:text="'Matrícula: ' + ${user.matricula}"></p>
+
+                        <form th:action="@{/tecnico/descontarCafe}" method="post">
+                            <input type="hidden" name="matricula" th:value="${user.matricula}"/>
+                            <button type="submit" class="btn-descontar" data-tipo="cafe">Descontar Café da Manhã</button>
+                        </form>
+
+                        <form th:action="@{/tecnico/descontarRefeicao}" method="post">
+                            <input type="hidden" name="matricula" th:value="${user.matricula}"/>
+                            <button type="submit" class="btn-descontar" data-tipo="ref">Descontar Almoço/Jantar</button>
+                        </form>
+
+                        <p id="menu-usuario">Mais Opções</p>
+                        <nav id="nav-menu-usuario">
+                            <div class="container-menu-usuario">
+                                <ul>
+                                    <li>
+                                        <button type="submit" id="openModal" class="btn-reembolso" data-tipo="cafe">
+                                            Solicitar Reembolso
+                                        </button>
+                                        <button type="submit" class="btn-reembolso">Reportar Foto</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                    <div id="modal-reembolso" class="modal">
+                        <div class="modal-content">
+                            <span id="closeModal" class="close">&times;</span>
+                            <form id="mealForm" th:action="@{/tecnico/solicitarReembolso}" method="post"
+                                  onsubmit="return validateForm()">
+                                <label>
+                                    <input type="radio" name="tipoTicket" value="CAFE" required>
+                                    Café da Manhã
+                                </label>
+                                <label>
+                                    <input type="radio" name="tipoTicket" value="ALMOCO" required>
+                                    Almoço/Jantar
+                                </label>
+                                <input type="number" id="textInput" name="quantidade" required
+                                       placeholder="Digite a quantidade de ticket para reembolso">
+                                <input type="hidden" name="matricula" th:value="${user.matricula}">
+                                <button type="submit">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${erroTicket}" class="alert alert-danger">
+                    <p th:text="${erroTicket}"></p>
+                </div>
+                <div th:if="${successMessage}" class="alert alert-success">
+                    <p th:text="${successMessage}"></p>
+                </div>
+            </section>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./js/tecnico.js"></script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Alterar Senha</title>
+        <link rel="stylesheet" href="/css/redefinir.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <form action="#" th:action="@{/redefinir-senha}" method="post" id="formRedefinirSenha">
+            <h1>Alterar Senha</h1>
+            <input type="hidden" name="token" th:value="${token}"/>
+
+            <label for="NovaSenha">Nova Senha:</label>
+            <input type="password" id="NovaSenha" name="novaSenha" required>
+
+            <label for="ConfirmaSenha">Confirmar Senha:</label>
+            <input type="password" id="ConfirmaSenha" name="ConfirmaSenha" required>
+
+            <p id="mensagemErro" style="color:red; display:none;">As senhas não coincidem!</p>
+            <button type="submit" id="submitButton" disabled>Alterar Senha</button>
+            <p th:if="${message}" th:text="${message}" id="msg"></p>
+            <p th:if="${error}" th:text="${error}" id="msg-erro"></p>
+
+        </form>
+        <script src="/js/redefinir.js"></script>
+    </body>
+</html>

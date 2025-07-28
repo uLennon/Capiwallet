@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Painel do Administrador - Restaurante Universitário UFRRJ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" href="./css/admin.css">
+        <link rel="stylesheet" href="./css/alterar.css">
+        <link rel="stylesheet" href="./css/cadastros.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <header>
+            <div class="container container-flex">
+                <h1 id="ADM-RU">Administração R.U</h1>
+                <div class="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <nav>
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="cadastroAdm">Cadastros</a></li>
+                        <li><a href="#" class="nav-link" data-target="alterarUsuario">Alterar Usuário</a></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <input id="sair-btn" type="submit" value="SAIR">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main id="content">
+            <input type="hidden" name="activeSection" th:value="${activeSection}" />
+            <div id="cadastroAdm" class="cadastros-container section" style="display: block">
+                <h2>Cadastros de Usuários</h2>
+                <div th:if="${usuarios.size() > 0}"  th:each="usuario : ${usuarios}" class="usuario-item">
+                    <p>Nome: <span th:text="${usuario.nome}"></span></p>
+                    <p>Matrícula: <span th:text="${usuario.matricula}"></span></p>
+                    <p>Email: <span th:text="${usuario.email}"></span></p>
+                    <p>Tipo de Usuário: <span th:text="${usuario.tipoUsuario}"></span></p>
+
+                    <form th:action="@{/admin/aceitar}" method="post">
+                        <input type="hidden" name="matricula" th:value="${usuario.matricula}" />
+                        <button class="btn-aceitar" type="submit">Aceitar</button>
+                    </form>
+
+                    <button class="btn-rejeitar" type="button">Rejeitar</button>
+                </div>
+                <div th:if="${usuarios.size() == 0}">
+                    <p>Nenhum usuário pendente para validação!</p>
+                </div>
+            </div>
+
+            <div id="modal-rejeitar" class="modal section" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" id="close-rejeitar">&times;</span>
+                    <h2>Motivo da Rejeição</h2>
+                    <form id="form-rejeitar" th:action="@{/admin/rejeitar}" method="post">
+                        <input type="hidden" id="user-id-rejeitar" name="matricula" />
+                        <div class="form-group">
+                            <label for="motivo">Motivo:</label>
+                            <textarea id="motivo" name="motivo" rows="4" required></textarea>
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="alterarUsuario" class="alterar-container section" style="display: none">
+                <form id="form-busca-usuario" th:action="@{/admin}" method="post">
+                    <input type="text" id="busca" name="busca" placeholder="Buscar por matrícula">
+                    <button type="submit" >Buscar</button>
+                </form>
+                <h2>Alterar Usuário</h2>
+                <div th:if="${usuarioEncontrado}" class="usuario-altera-item ">
+                    <img  th:src="${image}">
+                    <div class="usuario-altera-info">
+                        <p>Nome: <span th:text="${usuarioEncontrado.nome}"></span></p>
+                        <p>Matrícula: <span th:text="${usuarioEncontrado.matricula}"></span></p>
+                        <p>Email: <span th:text="${usuarioEncontrado.email}"></span></p>
+                        <p>Tipo de Usuário: <span th:text="${usuarioEncontrado.tipoUsuario}"></span></p>
+                        <button class="btn-editar"
+                                th:data-nome="${usuarioEncontrado.nome}"
+                                th:data-email="${usuarioEncontrado.email}"
+                                th:data-matricula="${usuarioEncontrado.matricula}"
+                                th:data-tipo="${usuarioEncontrado.tipoUsuario}">Editar
+                        </button>
+                    </div>
+                </div>
+                <div th:if="${erro}">
+                    <p th:text="${erro}"></p>
+                </div>
+            </div>
+
+            <div id="modal-editar" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" id="close-editar">&times;</span>
+                    <h2>Editar Usuário</h2>
+                    <form id="form-editar-usuario" th:action="@{/admin/editar}" method="post">
+                        <input type="hidden" id="user-id-editar" name="matricula">
+                        <div class="form-group">
+                            <label for="novo-nome">Nome:</label>
+                            <input type="text" id="novo-nome" name="novo-nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="novo-email">Email:</label>
+                            <input type="email" id="novo-email" name="novo-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nova-senha">Senha:</label>
+                            <input type="password" id="nova-senha" name="nova-senha">
+                        </div>
+                        <div class="form-group">
+                            <label for="aceitar">Tornar Técnico:</label>
+                            <input type="checkbox" id="aceitar" name="aceitar">
+                        </div>
+                        <button type="submit">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/localization/messages_pt_BR.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="./js/admin.js"></script>
+        <script src="./js/alterar.js"></script>
+        <script src="./js/cadastros.js"></script>
+    </body>
+</html>

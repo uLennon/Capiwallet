@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Capiwallet</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" href="/css/dashstyle.css">
+        <link rel="stylesheet" href="/css/carteira.css">
+        <link rel="stylesheet" href="/css/comprar.css">
+        <link rel="stylesheet" href="/css/usuario.css">
+        <link rel="stylesheet" href="/css/historicoCompras.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <header>
+            <div class="container container-flex">
+                <h1>Capiwallet</h1>
+                <div class="menu">
+                    <div class="bar">
+                        <span class="bar-1"> </span>
+                        <span class="bar-2"> </span>
+                        <span class="bar-3"> </span>
+                    </div>
+                </div>
+            </div>
+            <nav>
+                <div class="container" id="menu-container">
+                    <ul id="menu-list">
+                        <li id="item-comprar">
+                            <a href="#" class="nav-link" data-target="comprar" onclick="showSection('comprar'); setActiveLink(this)"><img id="comprar-icon" src="/assets/carrinho.png" alt="Comprar Icon">Comprar</a>
+                        </li>
+                        <li id="item-carteira">
+
+                            <a href="#" class="nav-link" data-target="carteira" onclick="showSection('carteira'); setActiveLink(this)"><img id="carteira-icon" src="/assets/carteira.png" alt="Carteira Icon">Carteira</a>
+                        </li>
+                        <li id="item-usuario">
+
+                            <a href="#" class="nav-link" data-target="usuario" onclick="showSection('usuario'); setActiveLink(this)"><img id="usuario-icon" src="/assets/user.png" alt="Usuário Icon">Usuário</a>
+                        </li>
+                        <li id="item-qrcode">
+
+                            <a href="#" class="nav-link" data-target="QR-Code" onclick="showSection('QR-Code'); setActiveLink(this)"><img id="qrcode-icon" src="/assets/scanner.png" alt="Qr Code Icon">Qr Code</a>
+                        </li>
+                        <li id="item-sair">
+                            <form th:action="@{/logout}" method="post">
+                                <input id="logout-btn" type="submit" value="SAIR">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main id="content">
+            <div id="carteira" class="section" style="display: none">
+                <div class="carteira-container">
+                    <h2 class="carteira-title">Carteira</h2>
+                    <p class="tickets-info">Quantidade de tickets:</p>
+                    <ul class="ticket-list">
+                        <li th:if="${carteira.getQuantidadeTicketRefeicao()} != null" class="li-tickets">
+                            <img class="icon-almoco" src="/assets/garfoFaca.png" alt="Ícone Refeicao">
+                            <strong>Refeição:</strong>
+                            <span th:text="${carteira.getQuantidadeTicketRefeicao()}"></span>
+                        </li>
+                        <li th:if="${carteira.getQuantidadeTicketCafe()} != null" class="li-tickets">
+                            <img class="icon-cafe" src="/assets/cafeManha.png" alt="Ícone Cafe da manha">
+                            <strong>Café da manhã:</strong>
+                            <span th:text="${carteira.getQuantidadeTicketCafe()}"></span>
+                        </li>
+                    </ul>
+                    <button id="comprar-tickets" class="button-buy">Comprar mais tickets</button>
+                </div>
+            </div>
+
+            <div id="comprar" class="section" style="display: none;">
+                <div class="form-container">
+                    <form th:action="@{/inicio/criaPagamento}" method="post" id="ticket-form" onsubmit="exibirProcessamento()">
+                        <h2>Compra de Tickets</h2>
+                        <div class="form-group">
+                            <label for="cafeManha">Café da Manhã (R$ 0,70):</label>
+                            <input type="number" id="cafeManha" name="cafeManha" min="0" step="1" oninput="calcularTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label for="refeicao">Refeição (R$ 1,45):</label>
+                            <input type="number" id="refeicao" name="refeicao" min="0" step="1" oninput="calcularTotal()">
+                        </div>
+                        <div class="total" id="total">Total: R$ 0.00</div>
+                        <input type="submit" value="Comprar" id="submitBtn" disabled>
+                    </form>
+                </div>
+
+                <div id="modalLoadingMessage" class="modalLoading" >
+                    <div class="modalLoading-content">
+                        <p>Pagamento está sendo gerado, por favor aguarde...</p>
+                        <img src="/assets/load.gif" alt="Carregando...">
+                    </div>
+                </div>
+                <div th:if="${erroGerarPagamento}" id="errorGerarPagamento" class="modalLoading" style="display: block;">
+                    <div class="modalLoading-content">
+                        <span class="close" onclick="closeModal('errorGerarPagamento')">&times;</span>
+                        <p th:text="${erroGerarPagamento}"></p>
+                    </div>
+                </div>
+
+                <div th:if="${erroPagamento}" id="errorPagamento" class="modalLoading" style="display: block;">
+                    <div class="modalLoading-content">
+                        <span class="close" onclick="closeModal('errorPagamento')">&times;</span>
+                        <p th:text="${erroPagamento}"></p>
+                    </div>
+                </div>
+                <div id="qrModal" class="modal" th:if="${showModal}" style="display: block;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('qrModal')">&times;</span>
+                        <h2>Pagamento</h2>
+                        <div th:text="'Total: R$ ' + ${total}"></div>
+                        <img th:src="'https://quickchart.io/qr?text=' + ${dadoQRCode}" alt="QR Code" id="qrcode">
+                        <textarea name="Código" id="codigoPix" th:text="${pixCopiaECola}"></textarea>
+                        <div id="modalTotal"></div>
+                        <button onclick="copiarCodigoPix()">Copiar código Pix</button>
+                        <form th:action="@{/inicio/pagarPix}" method="post">
+                            <input type="hidden" name="pixCopiaECola" th:value="${pixCopiaECola}">
+                            <button type="submit" style="margin-top: 1%;">Pagar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div id="usuario" class="section" style="display: none;">
+                <div class="usuario-container">
+                    <h2>Dados do Usuário</h2>
+                    <img class="foto-usuario" th:if="${image}" th:src="${image}" alt="Imagem do Usuário" />
+                    <p th:text="${usuario.getNome()}"></p>
+                    <p th:text="${usuario.getEmail()}">Email: </p>
+                    <p th:text="${usuario.getMatricula()}">Matrícula: </p>
+                    <form id="imageUploadForm" th:action="@{/imagem}" method="post" enctype="multipart/form-data">
+                        <div class="custom-file">
+                            <input type="file" id="file" name="file" class="file-input" onchange="submitForm()">
+                            <label for="file" class="file-label">Escolher Imagem</label>
+                            <span id="file-name" class="file-name" style="display:none;">Nenhum arquivo selecionado</span>
+                        </div>
+                        <button type="submit" style="display:none;">Enviar Imagem</button>
+                    </form>
+                    <div th:if="${imagemErro}" class="alert alert-danger">
+                        <p th:text="${imagemErro}"></p>
+                    </div>
+
+                    <button id="btn-trocar-senha">Trocar Senha</button>
+                    <button id="btn-trocar-email">Trocar Email</button>
+                    <form th:action="@{/inicio/historicoCompra}" method="post">
+                        <button id="open-historico">Histórico de Compras</button>
+                    </form>
+                    <div th:if="${senhaErro}" class="alert alert-danger">
+                        <p th:text="${senhaErro}"></p>
+                    </div>
+                    <div th:if="${senhaSuccesso}" class="alert alert-success">
+                        <p th:text="${senhaSuccesso}"></p>
+                    </div>
+                    <div th:if="${emailSucesso}" class="alert alert-success">
+                        <p th:text="${emailSucesso}"></p>
+                    </div>
+                </div>
+
+                <input type="hidden" name="activeSection" th:value="${activeSection}" />
+                <div id="modal-senha" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="close-senha">&times;</span>
+                        <h2>Trocar Senha</h2>
+
+                        <form id="form-trocar-senha" th:action="@{/inicio/senha}" method="post">
+                            <div class="form-group">
+                                <label for="senha-atual">Senha Atual:</label>
+                                <input type="password" id="senha-atual" name="senha-atual" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="nova-senha">Nova Senha:</label>
+                                <input type="password" id="nova-senha" name="nova-senha" required>
+                            </div>
+                            <button type="submit">Confirmar </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="modal-email" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="close-email">&times;</span>
+                        <h2>Trocar Email</h2>
+                        <form id="form-trocar-email" th:action="@{/inicio/email}" method="post">
+                            <div class="form-group">
+                                <label for="novo-email">Novo Email:</label>
+                                <input type="email" id="novo-email" name="novo-email" required>
+                            </div>
+                            <button type="submit">Confirmar</button>
+                        </form>
+                    </div>
+                </div>
+                <div id="modal-historico" class="historico-modal" th:if="${exibirModal}">
+                    <div class="modal-content-historico">
+                        <span class="close-h" id="close-historico">&times;</span>
+                        <h3>Histórico de Compras</h3>
+
+                        <table class="styled-table">
+                            <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Compra</th>
+                                <th>Refeição</th>
+                                <th>Café da manhã</th>
+                                <th>Valor(R$)</th>
+                            </tr>
+                            </thead>
+                            <tbody th:if="${historicoVazio}">
+                                <tr>
+                                    <td th:text="${historicoVazio}"  colspan="5"></td>
+                                </tr>
+                            </tbody>
+                            <tbody th:if="${compras}">
+                            <tr th:each="compra : ${compras}">
+                                <td th:text="${compra.getData()}" ></td>
+                                <td th:text="${compra.getNomeVendedor()}" ></td>
+                                <td th:text="${compra.getQuantidadeTicketRefeicao()}"></td>
+                                <td th:text="${compra.getQuantidadeTicketCafeManha()}"></td>
+                                <td th:text="${compra.getValor()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="QR-Code" class="section" style="display: none;">
+                <div class="carteira-container">
+                    <img class="foto-qrcode" th:if="${usuario.getQRCodeImage()}" th:src="${usuario.getQRCodeImage()}" alt="Imagem do QRcode" />
+                </div>
+            </div>
+
+            <script src="./js/comprar.js"></script>
+            <script src="./js/usuario.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/localization/messages_pt_BR.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+            <script src="./js/dashmain.js"></script>
+        </main>
+    </body>
+</html>

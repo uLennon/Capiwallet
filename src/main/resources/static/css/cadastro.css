@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+img {
+    height: 10%;
+    width: 13%;
+
+}
+
+
+body {
+    background-color: #f2f2f2;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+
+header {
+    background-color: #8B4513;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content:center
+
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-campo {
+    margin-bottom: 20px;
+}
+
+.form-campo label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-campo input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.container button {
+    background-color: #884a20;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+}
+
+.container button:hover {
+    background-color: #34804b;
+}
+
+.error {
+    color: red;
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+
+
+/* Estilo do link de "Voltar para o Login" */
+.container p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.container p a {
+    color: #884a20; /* Cor semelhante ao botão de enviar */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.container p a:hover {
+    color: #34804b; /* Cor do hover semelhante ao botão */
+    text-decoration: underline;
+}
+
+
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+
+    .form-campo input, .container button {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    header, h2 {
+        font-size: 1.2em;
+    }
+
+    img {
+        height: 20%;
+        width: 30%;
+    }
+
+    .form-campo input, .container button {
+        font-size: 0.875em;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+
+    #content, .carteira-container , ul, li, p, strong  {
+        background-color: #333;
+    }
+
+    .carteira-container, h1, h2, header,.container,.menu,nav,p {
+        background-color: #161616;
+    }
+
+    .container button{
+        background-color: #1b412a;
+        color: white;
+    }
+    button:hover{
+        background-color: #235f3b;
+    }
+
+}

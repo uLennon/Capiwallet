@@ -1,0 +1,298 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #8B4513;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container-login {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logo img {
+    width: 450px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.login-form {
+    background-color: #cd853f;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.login-form h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.login-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form input {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    background-color: #8b4513;
+    color: #ffffff;
+}
+
+.login-form button {
+    padding: 10px;
+    background-color: #41210b;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #237c23;
+}
+
+.login-form p {
+    margin-top: 10px;
+    color: #ffffff;
+}
+
+.login-form a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.login-form a:hover {
+    text-decoration: underline;
+}
+
+::placeholder {
+    color: #cd853f;
+}
+
+.modal-redefinir-senha {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #cd853f;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    color: #41210b;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#redefinirSenhaForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#redefinirSenhaForm label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #ffffff;;
+}
+
+#redefinirSenhaForm input[type="email"],
+#redefinirSenhaForm input[type="text"] {
+    padding: 10px;
+    border: 1px solid #8b4513;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+#redefinirSenhaForm input{
+    background-color: #8b4513;
+}
+
+
+#redefinirSenhaForm button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #41210b;
+    border: none;
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+
+}
+
+#redefinirSenhaForm button:hover {
+    background-color: #237c23;
+}
+
+#error-message{
+    background-color: #41210b;
+    color: #d32f2f;
+    border: 1px solid #f8bbd0;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+    justify-content: center;
+}
+#error-message.hidden {
+    display: none;
+}
+
+#error-message .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #d32f2f;
+}
+
+
+#error-message.fade-out {
+    opacity: 0;
+}
+
+@media (min-width: 800px) {
+    .container-login {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .logo {
+        margin-right: 50px;
+    }
+
+    .login-form {
+        max-width: 450px;
+        width: 450px;
+    }
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+
+    .logo img {
+        width: 300px;
+    }
+
+
+    .login-form h1 {
+        font-size: 20px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #fff;
+    }
+    #error-message{
+        background-color: #2a4466;
+
+    }
+    #error-message p{
+        background-color: #2a4466;
+    }
+
+    #content, .carteira-container, ul, li, p, strong {
+        background-color: #333;
+    }
+
+    .carteira-container, h1, h2, header, .container, .menu, nav {
+        background-color: #161616;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 36%;
+        background-color: #161616;
+        color: #fff;
+
+    }
+    .login-form, h1, h2, p{
+        background-color: #161616;
+
+    }
+    .login-form button{
+        background-color: #1b412a;
+    }
+    .login-form button:hover{
+        background-color: #235f3b;
+    }
+    .login-form input{
+        border: 1px solid #000;
+        background-color: #2a4466;
+        color: #ffffff;
+    }
+    ::placeholder {
+        color: #ffffff;
+    }
+    .modal-content{
+        background-color: #161616;
+        color: white;
+    }
+    #redefinirSenhaForm button{
+        background-color: #1b412a;
+        transition: background-color 0.3s;
+    }
+    #redefinirSenhaForm input[type="email"], #redefinirSenhaForm input[type="text"] {
+        border: 1px solid #000;
+        background-color: #2a4466;
+        color: #ffffff;
+    }
+    .close{
+        color: #2a4466;
+    }
+
+
+}

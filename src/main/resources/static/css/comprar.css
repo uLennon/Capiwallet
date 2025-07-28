@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: #552909;
+}
+
+#qrcode {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+}
+
+.form-container {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 80px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="number"], input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.total {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+button {
+    background-color: rgb(49, 99, 49);
+    color: #fff;
+}
+
+.modal {
+    display: none;
+    position:fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modalLoading {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fica fixo sobre a página */
+    z-index: 1000; /* Z-index alto para ficar sobre outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Fundo semi-transparente */
+}
+
+.modalLoading-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 20%;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .modalLoading-content {
+        width: 85%;
+    }
+}
+
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #161616;
+        color: #fff; 
+    }
+
+    .carteira-container, h1, h2, header,.container,.menu,nav,.form-container,p {
+        background-color: #161616;
+    }
+
+
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.utraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-login">
+            <div class="logo">
+                <img id="logo-image" src="/assets/CAPIVARAPARALOGOCLARO.png" alt="Logo">
+            </div>
+            <div class="login-form">
+                <h1>Capiwallet</h1>
+                <h3>Acesse sua conta</h3>
+
+                <form th:action="@{/login}"  method="post">
+                    <input type="text" id="username" name="username" placeholder="Matrícula" required>
+                    <input type="password" id="password" name="password" placeholder="Senha" required>
+                    <button type="submit">Login</button>
+                </form>
+
+                <p>Ainda não tem uma conta? <a href="/cadastrar">Cadastre-se</a></p>
+                <p>Esqueceu a senha? <a href="#" id="openModalBtn">Recupere</a></p>
+                <div id="error-message" th:if="${param.error}">
+                    <span class="icon">⚠️ </span>
+                    <p th:text="${session.error}"></p>
+
+                </div>
+            </div>
+        </div>
+        <div id="modal-redefinir-senha" class="modal-redefinir-senha">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal-redefinir-senha')">&times;</span>
+                <h3>Solicitar nova senha:</h3>
+                <form id="redefinirSenhaForm" th:action="@{/login/redefinirSenha}"  method="post">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Digite o email" required>
+                    <label for="matricula">Matrícula:</label>
+                    <input type="text" id="matricula" name="matricula" placeholder="Digite a matrícula" required>
+                    <button type="submit" >Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div th:if="${linkSuccesso}" id="respostaSucesso" class="modal-redefinir-senha" style="display: block;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('respostaSucesso')">&times;</span>
+                <p th:text="${linkSuccesso}"></p>
+            </div>
+        </div>
+        <div th:if="${linkErro}" id="respostaErro"  class="modal-redefinir-senha" style="display: block;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('respostaErro')">&times;</span>
+                <p th:text="${linkErro}"></p>
+            </div>
+        </div>
+        <script src="/js/cadastro.js"></script>
+    </body>
+</html>

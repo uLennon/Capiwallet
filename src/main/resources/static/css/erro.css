@@ -1,0 +1,39 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.error-image {
+    max-width: 100%;
+    height: auto;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+.error-image {
+    max-width: 100%;
+    width: 510px;
+    height: auto;
+}

@@ -1,0 +1,365 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #003366;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    cursor: pointer;
+}
+
+.menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+}
+
+
+#nav-menu ul li {
+    padding: 10px;
+    text-align: center;
+}
+
+#nav-menu {
+    display: none;
+    background-color: #003366;
+}
+
+
+#nav-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#nav-menu ul li a,
+#nav-menu ul li button {
+    color: #fff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+#content {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-container, .calculadora-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-container:hover, .calculadora-container:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 14px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #f9f9f9;
+}
+
+input[type="number"]:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 8px rgba(76, 175, 80, 0.2);
+    outline: none;
+    background-color: #fff;
+}
+
+.total, .troco {
+    font-weight: 600;
+    margin-top: 15px;
+    color: #333;
+    text-align: right;
+    font-size: 18px;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+input[type="submit"]:not(:disabled):hover {
+    background-color: #45a049;
+
+}
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+.modal-content {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    margin-left: 40%;
+    margin-top: 10%;
+}
+
+
+.close {
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+
+#h2-confirma {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: #333;
+}
+
+
+#infoComprador {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+
+#fotoComprador {
+    border-radius: 8px;
+    margin-right: 15px;
+    width: 160px;
+    height: 250px;
+}
+
+
+#confirmBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+#confirmBtn:hover {
+    background-color: #45a049;
+}
+
+.section {
+    margin: 20px 0;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+td {
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.export-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+
+.export-buttons button {
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+.export-buttons .export-pdf {
+    background-color: #004085;
+}
+
+.export-buttons .export-pdf:hover {
+    background-color: #003066;
+    transform: scale(1.05);
+}
+
+
+.export-buttons .export-excel {
+    background-color: #6c757d;
+}
+
+.export-buttons .export-excel:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+
+
+@media (max-width: 600px) {
+    .form-container, .calculadora-container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    input[type="number"], input[type="submit"] {
+        font-size: 14px;
+    }
+
+    .total, .troco {
+        font-size: 16px;
+    }
+    .modal{
+        padding-top: 20%;
+    }
+    #content{
+        margin-right: 9%;
+        margin-top: 3%;
+    }
+    .modal-content {
+        padding: 15px;
+        margin-left: 8px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    #fotoComprador {
+        width: 200px;
+        height: 300px;
+    }
+
+    #confirmBtn {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+}
+

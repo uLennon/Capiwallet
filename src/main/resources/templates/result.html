@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>QR Code Result</title>
+    </head>
+    <body>
+        <h1>QR Code Result</h1>
+        <div th:if="${qrCodeText}">
+            <p>QR Code contém: <strong th:text="${qrCodeText}"></strong></p>
+        </div>
+        <a th:href="@{/}">Voltar</a>
+    </body>
+</html>

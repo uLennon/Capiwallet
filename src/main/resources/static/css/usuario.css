@@ -1,0 +1,169 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    background-color: #552909;
+}
+
+.usuario-container {
+    background-color: #fff;
+    padding: 80px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.usuario-container h2 {
+    margin-bottom: 15px;
+}
+
+.usuario-container p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.usuario-container button {
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    background-color: #4b9b65;;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.usuario-container button:hover {
+    background-color: #1c3a26;
+}
+
+/* Estilos para os modais */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 44px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 450px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.carteira-title {
+    font-size: 1.8em;
+    color: black;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.tickets-info {
+    color: black;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.ticket-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.li-tickets {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+.icon-almoco, .icon-cafe{
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+
+.button-buy {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-buy:hover {
+    background-color: #45a049;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #333;
+        color: #fff; 
+    }
+
+    .carteira-container, h1, h2, header,.container,.menu,nav, .usuario-container, .modal-content,p {
+        background-color: #161616;
+    }
+    .carteira-title{
+        color: white;
+    }
+    .tickets-info{
+        color: white;
+    }
+    .icon-almoco {
+        content: url('/assets/almocobranco.png');
+    }
+    .icon-cafe{
+        content: url('/assets/cafebranco.png');
+    }
+
+}

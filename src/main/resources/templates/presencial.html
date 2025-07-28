@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.utraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Compra Presencial - Restaurante Universitário UFRRJ</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" href="/css/presencial.css">
+        <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+
+    </head>
+    <body>
+        <header>
+            <div class="container container-flex">
+                <h1>Compra Presencial R.U</h1>
+                <div class="menu" id="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <nav id="nav-menu">
+                <div class="container">
+                    <ul>
+                        <li><a href="#" class="nav-link" data-target="comprar">Venda de Tickets</a></li>
+                        <li><a href="#" class="nav-link" data-target="historico">Historico de Vendas</a></li>
+                        <li><a href="/tecnico">Voltar</a></li>
+                        <li>
+                            <form th:action="@{/logout}" method="post">
+                                <button id="sair-btn" value="SAIR">Sair</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main id="content">
+
+            <div id="comprar" class="section">
+                <div class="form-container">
+                    <form id="ticket-form" onsubmit="return abrirModal(event)">
+                        <h2>Compra de Tickets</h2>
+                        <div class="form-group">
+                            <label for="matricula">Matrícula do Usuário</label>
+                            <input type="number" id="matriculaUsuario" name="matricula" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cafeManha">Café da Manhã (R$ 0,70):</label>
+                            <input type="number" id="cafeManha" name="cafeManha" min="0" step="1" oninput="calcularTotal()">
+                        </div>
+                        <div class="form-group">
+                            <label for="almoco">Almoço (R$ 1,45):</label>
+                            <input type="number" id="almoco" name="almoco" min="0" step="1" oninput="calcularTotal()">
+                        </div>
+                        <div class="total" id="total">Total: R$ 0.00</div>
+                        <input type="submit" value="Enviar" id="submitBtn">
+                    </form>
+                </div>
+                <div id="calculadora" class="calculadora-container">
+                    <h2>Calculadora de Troco</h2>
+                    <div class="form-group">
+                        <label for="valorRecebido">Valor Recebido:</label>
+                        <input type="number" id="valorRecebido" min="0" step="0.01" oninput="calcularTroco()">
+                    </div>
+                    <div class="troco" id="troco">Troco: R$ 0.00</div>
+                </div>
+            </div>
+            <div id="confirmModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="fecharModal()">&times;</span>
+                    <h2 id="h2-confirma">Confirmação de Compra</h2>
+                    <p>Confirme os detalhes do comprador:</p>
+                    <div id="infoComprador">
+                        <img id="fotoComprador" src="#" alt="Foto do Comprador">
+                        <p id="nomeComprador">Nome do Comprador</p>
+                    </div>
+
+
+                    <form id="confirmForm" th:action="@{/tecnico/compra}" method="post">
+                        <input type="hidden" name="matricula" id="modalMatricula">
+                        <input type="hidden" name="cafeManha" id="modalCafeManha">
+                        <input type="hidden" name="almoco" id="modalAlmoco">
+                        <button type="submit" id="confirmBtn">Confirmar</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="historico" class="section">
+                <div class="export-buttons">
+                    <form th:action="@{/tecnico/compra/exportarPDF}" method="post">
+                        <button class="export-pdf" type="submit">Exportar PDF</button>
+                    </form>
+                    <form th:action="@{/tecnico/compra/exportarExcel}" method="post">
+                        <button class="export-excel" type="submit">Exportar Planilha</button>
+                    </form>
+                </div>
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Técnico</th>
+                        <th>Matrícula</th>
+                        <th>Quantidade Ticket Refeição</th>
+                        <th>Quantidade Ticket Café</th>
+                        <th>Valor Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr th:each="compra : ${comprasPresenciais}">
+                        <td th:text="${compra.getData()}"></td>
+                        <td th:text="${compra.getNomeVendedor()}"></td>
+                        <td th:text="${compra.getMatricula()}"></td>
+                        <td th:text="${compra.getQuantidadeTicketRefeicao()}"></td>
+                        <td th:text="${compra.getQuantidadeTicketCafeManha()}"></td>
+                        <td th:text="${compra.getValor()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="/js/presencial.js"></script>
+    </body>
+</html>

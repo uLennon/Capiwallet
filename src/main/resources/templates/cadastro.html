@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Formulário de Cadastro </title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href='https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap' rel='stylesheet'>
+        <link rel="stylesheet" href="/css/cadastro.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon_io/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon_io/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon_io/favicon-16x16.png">
+        <link rel="manifest" href="/assets/favicon_io/site.webmanifest">
+    </head>
+    <body>
+        <header>
+            <div class="textos">
+            <h1>Capiwallet</h1>
+            <h2>Cadastro para criação da conta</h2>
+        </div>
+
+        <img src="/assets/CAPIVARAPARALOGOCLARO.png" alt="Logo">
+        </header>
+        <div class="container">
+            <h2>Insira seus dados para finalização do cadastro</h2>
+                <form id="form" th:action="@{/cadastrar}" method="post" th:object="${usuario}" onsubmit="return validarFormulario()">
+                    <div class="form-campo">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-campo">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="email@exemplo.com" required>
+                    </div>
+                    <div class="form-campo">
+                        <label for="matricula">Matrícula</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="0000000" required>
+                    </div>
+                    <div class="form-campo">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="****" required>
+                    </div>
+                    <button type="submit">Enviar</button>
+                </form>
+            <p>Voltar para o <a href="/login">Login</a></p>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/jquery.validate.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.3/localization/messages_pt_BR.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+        <script src="./js/cadastro.js"></script>
+    </body>
+</html>

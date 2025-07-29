@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ru?useSSL=false&serverTimezone=UTC
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+banco:
+  brasil:
+    api:
+      url: https://api-pix.hm.bb.com.br/pix/v2
+    access:
+      token: ${BB_TOKEN}
+    app:
+      key: ${BB_APP_KEY}
+
+config:
+  clientId: ${BB_CLIENT_ID}
+  clientSecret: ${BB_CLIENT_SECRET}
+  urlAuth: https://oauth.sandbox.bb.com.br/oauth/token
+  chave: ${BB_CHAVE}
+  urlApi: https://api.hm.bb.com.br
+  urlPagamento: https://api.hm.bb.com.br/testes-portal-desenvolvedor/v1/boletos-pix/pagar
+  chavePagamento: ${BB_CHAVE_PAGAMENTO}
+  chavePix: ${BB_CHAVE_PIX}
+
+app:
+  domain: https://localhost:8080
